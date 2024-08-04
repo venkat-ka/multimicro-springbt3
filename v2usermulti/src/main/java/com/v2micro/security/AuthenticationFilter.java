@@ -1,4 +1,4 @@
-package com.v2micro.security;
+	package com.v2micro.security;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -78,8 +78,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 						Date.from(now.plusMillis(Long.parseLong(environment.getProperty("token.expiration_time")))))
 				.setIssuedAt(Date.from(now)).signWith(secretKey, SignatureAlgorithm.HS512).compact();
 
-		res.addHeader("token", token);
-		res.addHeader("userId", userDetails.getUserId());
+		res.addHeader("Access-Token", token);
+		res.addHeader("Access-Control-Expose-Headers", "Access-Token, Uid");
+		res.addHeader("Uid", userDetails.getUserId());
 	}
 }
 

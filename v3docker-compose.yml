@@ -33,6 +33,13 @@ services:
     networks:
       - micrv2network
 
+  awsome-app:
+    image: venkateshkrish/awesone-app:nginx
+    container_name: awesome-app
+    ports:
+      - "8082:80"
+   
+
       
 
 networks:

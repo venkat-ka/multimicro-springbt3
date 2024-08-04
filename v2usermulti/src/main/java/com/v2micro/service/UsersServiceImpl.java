@@ -22,6 +22,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -114,6 +115,18 @@ public class UsersServiceImpl implements UsersService {
 //        
 //		userDto.setAlbums(albumsList);
 		
+		return userDto;
+	}
+
+	@Override
+	public List<UserDto> getAllUser() {
+		// TODO Auto-generated method stub
+		List<UserEntity> userEntity = usersRepository.findAll();
+		List<UserDto> userDto = new ArrayList<>();
+		for(UserEntity user:userEntity) {
+			UserDto mapUserDt = new ModelMapper().map(user, UserDto.class);
+			userDto.add(mapUserDt);
+		}
 		return userDto;
 	}
 

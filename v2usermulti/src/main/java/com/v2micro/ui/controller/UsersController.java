@@ -1,5 +1,8 @@
 package com.v2micro.ui.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +26,7 @@ import com.v2micro.service.UsersService;
 import com.v2micro.shared.UserDto;
 import com.v2micro.ui.model.CreateUserRequestModel;
 import com.v2micro.ui.model.CreateUserResponseModel;
+import com.v2micro.ui.model.RoleResponseModel;
 import com.v2micro.ui.model.UserResponseModel;
 
 @RestController
@@ -76,5 +81,20 @@ public class UsersController {
 		UserResponseModel returnValue = new ModelMapper().map(userDto, UserResponseModel.class);
 
 		return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+	}
+	
+	@GetMapping(value = "/role/{userId}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public List<RoleResponseModel> getAuthRole(@PathVariable("userId") String userId){
+		UserDto userDto = usersService.getUserByUserId(userId, "authorizedonly");
+		List<RoleResponseModel>  roleReturn = new ArrayList<>();
+		RoleResponseModel returnValue = new ModelMapper().map(userDto, RoleResponseModel.class);
+		roleReturn.add(returnValue);
+		return roleReturn;
+	}
+	
+	@GetMapping(value = "/getAll", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<List<UserDto>> getAll(){
+		List<UserDto> userDto = usersService.getAllUser();
+		return ResponseEntity.status(HttpStatus.OK).body(userDto);
 	}
 }
