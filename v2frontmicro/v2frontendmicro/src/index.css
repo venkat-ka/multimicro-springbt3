@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.userdtls{
+  margin: 30px auto;
+  border:2px solid grey;
+  text-align: center;
+  width: 600px;
+  padding:3px;
+}
+.fl{
+  width: 300px;
+  float: left;
+  border-right: 3px solid grey;
+}
+
+.fr{
+  width: 287px;
+  float: right;
+}
+.b{
+  font-weight:bold;
+}
+.clr{
+  clear:both;
+}

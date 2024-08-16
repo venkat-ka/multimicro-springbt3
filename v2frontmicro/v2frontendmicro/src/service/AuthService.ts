@@ -31,6 +31,28 @@ import AuthContext from '../ContextData/AuthContext.ts';
       //   return Promise.reject(error);
       // });
       
+      const  createUserApi = (endpoint:string, reqData:any)=>{
+        //  reqData = {
+        //     a: 10,
+        //     b: 20,
+        //   };
+         const headerData = { headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods":"POST, PUT, PATCH, GET, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers":"Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization, Access-Token, Uid",
+          "Access-Control-Expose-Headers":"*",
+          "withCredentials":true,
+          "Authorization":"Bearer "+isLoggedIn?.token
+            
+          },}
+       return  axios.post(baseUsr+endpoint, reqData, headerData);
+    }
+
+
+
+
      const  getUserList = (endpoint:string)=>{
 
     
@@ -54,7 +76,7 @@ import AuthContext from '../ContextData/AuthContext.ts';
      return  axios.get(baseUsr+endpoint, headerUData);
     
   }
-  return {getUserList}
+  return {getUserList, createUserApi}
     }
   
 export default useGetUserList;

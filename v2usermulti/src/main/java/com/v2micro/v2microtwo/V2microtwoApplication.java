@@ -1,4 +1,4 @@
-package com.v2micro;
+package com.v2micro.v2microtwo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -13,11 +13,11 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class V2usermultiApplication {
+public class V2microtwoApplication {
 	@Autowired
 	Environment environment;
 	public static void main(String[] args) {
-		SpringApplication.run(V2usermultiApplication.class, args);
+		SpringApplication.run(V2microtwoApplication.class, args);
 	}
 	
 	@Bean
